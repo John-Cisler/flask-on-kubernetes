@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookapp
+  labels:
+    app: bookapp
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookapp
+  # pod spec begins here
+  template:
+    metadata:
+      labels:
+        app: bookapp
+    spec:
+      containers:
+        - name: bookapp
+          image: registry.digitalocean.com/cloud-compute-registry/lab-8:0.0.1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5001
+      imagePullSecrets:
+        - name: registry-cloud-compute-registry
